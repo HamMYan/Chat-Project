@@ -1,0 +1,90 @@
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5509/5509636.png">
+
+<div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+        <div class="loginbackground box-background--white padding-top--64">
+            <div class="loginbackground-gridContainer">
+                <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+                    <div class="box-root"
+                        style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+                    </div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+                    <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;">
+                    </div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
+                    <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+                    <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+                    <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+                    <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+                    <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+                    <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+                    <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+            <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+                <h2 class="text-animation"><a rel="dofollow">Welcome back</a></h2>
+            </div>
+            <div class="formbg-outer">
+                <div class="formbg">
+                    <div class="formbg-inner padding-horizontal--48">
+                        <span class="padding-bottom--15">Login to your account</span>
+                        <form method="post" action="/login" id="stripe-login">
+                            <div class="field padding-bottom--24">
+                                <label for="email">Email</label>
+                                <input type="email" name="email">
+                                {{#if errorsObj.emailErr}}
+                                <p class="error">{{{errorsObj.emailErr}}}</p>
+                                {{/if}}
+                            </div>
+                            <div class="field padding-bottom--24">
+                                <div class="grid--50-50">
+                                    <label for="password">Password</label>
+                                </div>
+                                <input type="password" name="password">
+                                {{#if errorsObj.passwordErr}}
+                                    <p class="error">{{{errorsObj.passwordErr}}}</p>
+                                {{/if}}
+                                <div class="reset-pass">
+                                    <a href="#" style="margin-top: 7px;">Forgot your password?</a>
+                                </div>
+                            </div>
+                            <div class="field padding-bottom--24">
+                                <input type="submit" name="submit" value="Login">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-link padding-top--24">
+                    <span>Don't have an account? <a href="/register">Register</a></span>
+                    <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+                        <a href="https://github.com/HamletMYan"><i class="fa fa-github"
+                                style="font-size:30px; color: #5469d4; margin-right: 1px;"></i></a>
+                        <a href="https://www.instagram.com/kingdom_of_armenia_/"><i class="fa fa-instagram"
+                                style="font-size:30px; color: #5469d4; margin-left: 1px;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
