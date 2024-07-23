@@ -4,10 +4,11 @@ const { body, validationResult } = require("express-validator");
 const Maincontroller = require('../controller/MainController');
 const { User } = require("../model/model");
 const passport = require("passport");
+const { isLogin } = require("../middleware/middleware");
 const LocalStrategy = require("passport-local").Strategy;
 
-router.get('/', Maincontroller.loginPage);
-router.get('/register', Maincontroller.registerPage);
+router.get('/', isLogin, Maincontroller.loginPage);
+router.get('/register', isLogin, Maincontroller.registerPage);
 router.get('/verify', Maincontroller.verify);
 router.get('/verifypage', Maincontroller.verifyPage);
 
@@ -85,7 +86,7 @@ const loginValidation = [
         }),
     body('password').trim().notEmpty().withMessage('Password is required')
         .custom(async (value, { req }) => {
-            if(!value) throw new Error('Password is required')
+            if (!value) throw new Error('Password is required')
             const user = await User.findOne({ email: req.body.email });
             if (!user) throw new Error('User not found');
             const isMatch = await bcrypt.compare(value, user.password);
@@ -98,9 +99,10 @@ router.post('/login',
     loginValidation,
     Maincontroller.loginValidation,
     passport.authenticate('local', {
-        successRedirect: '/user/profile',
+        successRedirect: '/user/homePage',
         failureRedirect: '/',
     })
 );
+
 
 module.exports = router;
