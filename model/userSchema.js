@@ -1,10 +1,10 @@
-const Schema = require("mongoose").Schema
+const { Schema } = require("mongoose")
 
 const userSchema = new Schema({
     name: String,
 
     surname: String,
-    
+
     nickname: {
         type: String,
         unique: true
