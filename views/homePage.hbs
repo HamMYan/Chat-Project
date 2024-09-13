@@ -4,9 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram Home Page</title>
+  <title>Home Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/userStyle.css">
 </head>
 
@@ -21,16 +20,16 @@
       {{#each users}}
       <a style="text-decoration: none; color:white;" href="/user/chat/{{id}}">
         <div class="sidebar-item">
-          <img src="https://via.placeholder.com/50" alt="">
+          <img src="/{{picUrl}}" alt="">
           <div class="details">
             <span class="name">{{nickname}}</span>
+            <span class="message">{{lastMessage}}</span>
           </div>
-        </div>  
+        </div>
       </a>
       <hr>
       {{/each}}
       {{/if}}
-
     </div>
     <div class="content">
     </div>

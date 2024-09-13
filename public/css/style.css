@@ -24,6 +24,23 @@ a {
   text-decoration: unset;
 }
 
+input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  border: none;
+  background: #084cdf;
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  font-size: 0.875em;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+
 .login-root {
   background: #fff;
   display: flex;
@@ -394,6 +411,22 @@ p {
   justify-content: center;
   gap: 10px;
 }
+
+.profile-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 
 button {
   padding: 10px 20px;

@@ -20,7 +20,7 @@ class MainController {
         if (user) {
             await User.findByIdAndUpdate(user.id, {
                 isVerify: true,
-                emailToken: null
+                code: null
             });
             res.redirect('/verifypage');
         } else {
@@ -44,7 +44,7 @@ class MainController {
 
             const { name, surname, nickname, phonenumber, email, password } = req.body
             const hashedPass = bcrypt.hashSync(password, 10)
-            const emailToken = uuid.v4()
+            const code = uuid.v4()
 
             const user = await User.create({
                 name,
@@ -53,10 +53,10 @@ class MainController {
                 phonenumber,
                 email,
                 password: hashedPass,
-                emailToken
+                code
             })
 
-            const url = `http://localhost:3000/verify?email=${user.email}&token=${emailToken}`;
+            const url = `http://localhost:3000/verify?email=${user.email}&token=${code}`;
             const mailOptions = {
                 from: 'hammkrtchyan7@gmail.com',
                 to: 'hammkrtchyan7@gmail.com',
@@ -75,7 +75,7 @@ class MainController {
             const errorsObj = {};
             errors.array().forEach(err => {
                 errorsObj[err.path + "Err"] = err.msg;
-            });
+            }); 
             req.session.errors = errorsObj
             res.render('login', { errorsObj })
         }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/126/126472.png">
+</head>
+
+<body>
+    <div class="login-root">
+        <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh; flex-grow: 1;">
+            <div class="loginbackground box-background--white padding-top--64">
+                <div class="loginbackground-gridContainer">
+                </div>
+            </div>
+            <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+                <div class="formbg-outer">
+                    <div class="formbg">
+                        <div class="formbg-inner padding-horizontal--48">
+
+                            <div class="profile-image-container">
+                                {{#if user}}
+                                <img src="/{{user.picUrl}}" class="profile-image" />
+                                {{/if}}
+                            </div>
+
+                            <span class="padding-bottom--15">Update Your Profile Image</span>
+                            <form method="post" action="/user/uploadImage" enctype="multipart/form-data"
+                                id="upload-profile-image">
+                                <div class="field padding-bottom--24">
+                                    <label for="profileImage">Profile Image</label>
+                                    <input class="file file-block" type="file" name="image" accept="image/*">
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Update Image">
+                                </div>
+                            </form>
+                            <br>
+                            <hr><br>
+
+                            <span class="padding-bottom--15">Update Your Nickname</span>
+                            <form method="post" action="/user/updateNickname" id="update-nickname-form">
+                                <div class="field padding-bottom--24">
+                                    <label for="nickname">Nickname</label>
+                                    <input type="text" name="nickname">
+                                    {{#if errorsObj.nicknameErr}}
+                                    <p class="error">{{{errorsObj.nicknameErr}}}</p>
+                                    {{/if}}
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Update Your Nickname">
+                                </div>
+                            </form>
+
+                            <br>
+                            <hr><br>
+
+                            <span class="padding-bottom--15">Update Your Data</span>
+                            <form method="post" action="/user/updateData" id="update-data-form">
+                                <div class="field padding-bottom--24">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name">
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <label for="surname">Surname</label>
+                                    <input type="text" name="surname">
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Update Your Data">
+                                </div>
+                            </form>
+
+                            <br>
+                            <hr><br>
+
+                            <span class="padding-bottom--15">Update Your Password</span>
+                            <form method="post" action="/user/updatePassword" id="update-password-form">
+                                <div class="field padding-bottom--24">
+                                    <div class="grid--50-50">
+                                        <label for="oldPassword">Old Password</label>
+                                    </div>
+                                    <input type="password" name="oldPassword" id="old-password">
+                                    {{#if errorsObj.oldPasswordErr}}
+                                    <p class="error">{{{errorsObj.oldPasswordErr}}}</p>
+                                    {{/if}}
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <div class="grid--50-50">
+                                        <label for="newPassword">New Password</label>
+                                    </div>
+                                    <input type="password" name="newPassword" id="new-password">
+                                    {{#if errorsObj.newPasswordErr}}
+                                    <p class="error">{{{errorsObj.newPasswordErr}}}</p>
+                                    {{/if}}
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <div class="grid--50-50">
+                                        <label for="confpass">Confirm Password</label>
+                                    </div>
+                                    <input type="password" name="confpass" id="confpass">
+                                    {{#if errorsObj.confpassErr}}
+                                    <p class="error">{{{errorsObj.confpassErr}}}</p>
+                                    {{/if}}
+                                </div>
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Update Your Password">
+                                </div>
+                            </form>
+
+                            <br>
+                            <hr><br><br>
+
+                            <div class="field padding-bottom--24">
+                                <a href="/user/logOut">
+                                    <input type="submit" name="submit" value="LogOut">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-link padding-top--24">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

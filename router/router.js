@@ -44,6 +44,8 @@ router.post('/register', [
         })
 ], Maincontroller.register);
 
+
+
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done) => {
@@ -80,7 +82,7 @@ const loginValidation = [
         .isEmail().withMessage('Invalid email format')
         .custom(async (value) => {
             const user = await User.findOne({ email: value });
-            if (user && (!user.isVerify || user.emailToken)) throw new Error('User is not verified');
+            if (user && (!user.isVerify || user.code)) throw new Error('User is not verified');
             if (!user) throw new Error('Incorrect email');
             return true;
         }),
