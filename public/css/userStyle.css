@@ -71,9 +71,9 @@ html {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-image: url('https://w.wallha.com/ws/14/jbVvEcAi.jpg');
-    background-size: cover;
-    background-position: center;
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/792/639/808/pattern-monochrome-telegram-logo-cats-hd-wallpaper-preview.jpg');
+    background-repeat: repeat;
+    background-position: top left;
     border-left: 1px solid #333;
 }
 

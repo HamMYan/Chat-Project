@@ -54,15 +54,25 @@
             </div>
             <div class="message-text">Hello! How are you?</div>
           </div>
-          <!-- Add more messages here -->
         </div>
-        <div class="chat-footer">
-          <input type="text" class="chat-input" placeholder="Type a message...">
+        <form action="/user/newMess/{{friend.id}}" method="post" class="chat-footer">
+          <input type="text" name="message" class="chat-input" placeholder="Type a message...">
           <button class="send-button">Send</button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io()
+    const btn = document.querySelector('.send-button')
+    const message = document.getElementById('message')
+
+    btn.addEventListener('click', () => {
+      message.value = ''
+    })
+  </script>
 </body>
 
 </html>

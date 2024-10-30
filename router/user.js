@@ -5,6 +5,8 @@ const { body } = require('express-validator');
 const { User } = require('../model/model');
 const bcrypt = require('bcrypt');
 const { upload } = require('../uploads/config');
+const SocketController = require('../controller/SocketController');
+const socketController = new SocketController()
 
 user.get('/homePage', UserController.homePage);
 user.get('/logOut', UserController.logOut);
@@ -17,7 +19,7 @@ user.post('/updateNickname', [
     body('nickname').custom(async (value) => {
         if (value) {
             const user = await User.findOne({ nickname: value });
-            if (user) throw new Error(`${value} - has already`);
+            if (user) throw new  Error(`${value} - has already`);
             return true;
         }
         return true;
@@ -50,6 +52,11 @@ user.post('/updatePassword', [
         }),
 ], UserController.updatePassword);
 
+
 user.post('/uploadImage', upload.single('image'), UserController.uploadImage);
+user.post('/newMess/:id', async (req, res) => {
+    const { message } = req.body
+    await socketController.newMess(req, res, message);
+});
 
 module.exports = user;
