@@ -5,8 +5,6 @@ const { body } = require('express-validator');
 const { User } = require('../model/model');
 const bcrypt = require('bcrypt');
 const { upload } = require('../uploads/config');
-const SocketController = require('../controller/SocketController');
-const socketController = new SocketController()
 
 user.get('/homePage', UserController.homePage);
 user.get('/logOut', UserController.logOut);
@@ -54,9 +52,12 @@ user.post('/updatePassword', [
 
 
 user.post('/uploadImage', upload.single('image'), UserController.uploadImage);
-user.post('/newMess/:id', async (req, res) => {
-    const { message } = req.body
-    await socketController.newMess(req, res, message);
-});
+
+
+user.post('/newMess/:id',(req,res) => {
+    res.redirect(`/user/chat/${req.params.id}`)
+})
+
+
 
 module.exports = user;

@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +7,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div data-user="{{userID}}" class="container">
     <div class="sidebar">
       <a style="text-decoration: none;" href="/user/settings">
         <i style="font-size:24px" class="fa">&#xf013;</i>
@@ -37,7 +34,7 @@
           <div class="chat-header-left">
             {{#if friend}}
             <img src="/{{friend.picUrl}}" alt="User Avatar">
-            <span class="chat-user-name">{{friend.nickname}}</span>
+            <span class="chat-user-name" data-friend="{{friend.id}}">{{friend.nickname}}</span>
             {{/if}}
 
           </div>
@@ -54,10 +51,18 @@
             </div>
             <div class="message-text">Hello! How are you?</div>
           </div>
+          {{!-- <div class="message-right">
+            <div class="message-text">Hello! How are you?</div>
+            <div class="message-user">
+              {{#if user}}
+              <img src="/{{user.picUrl}}" alt="User Avatar">
+              {{/if}}
+            </div>
+          </div> --}}
         </div>
         <form action="/user/newMess/{{friend.id}}" method="post" class="chat-footer">
-          <input type="text" name="message" class="chat-input" placeholder="Type a message...">
-          <button class="send-button">Send</button>
+          <input type="text" id="message" name="message" class="chat-input" placeholder="Type a message...">
+          <button onclick="sendMessage()" class="send-button">Send</button>
         </form>
       </div>
     </div>
@@ -65,14 +70,60 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io()
-    const btn = document.querySelector('.send-button')
-    const message = document.getElementById('message')
+    const socket = io();
 
-    btn.addEventListener('click', () => {
+    const container = document.querySelector('.container');
+    const userID = container.dataset.user;
+    const friend = document.querySelector('.chat-user-name').dataset.friend
+    socket.emit('join', userID)
+
+
+    function scrollToBottom() {
+      const chatMessages = document.querySelector('.chat-messages');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+
+    socket.on('showMess', (messages) => {
+      messages.forEach((mess) => {
+        if (mess.from == userID) {
+          const message = `
+            <div class="message-right">
+              <div class="message-text">${mess.message}</div>
+              <div class="message-user">
+                {{#if user}}
+                  <img src="/{{user.picUrl}}" alt="User Avatar">
+                {{/if}}
+              </div>
+            </div >
+          `
+          document.querySelector('.chat-messages').insertAdjacentHTML('beforeend', message);
+        }
+        if (mess.from == friend) {
+          const message = `
+          <div class="message">
+            <div class="message-user">
+              {{#if friend}}
+              <img src="/{{friend.picUrl}}" alt="User Avatar">
+              {{/if}}
+            </div>
+            <div class="message-text">${mess.message}</div>
+          </div>
+          `
+          document.querySelector('.chat-messages').insertAdjacentHTML('beforeend', message);
+        }
+      })
+
+      scrollToBottom();
+    });
+    socket.emit('getMess', userID, friend)
+
+    function sendMessage() {
+      const message = document.getElementById('message')
+      socket.emit('newMess', message.value, userID, friend)
+      scrollToBottom();
       message.value = ''
-    })
+    }
   </script>
-</body>
 
-</html>
+</body>

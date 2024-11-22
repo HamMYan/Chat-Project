@@ -131,12 +131,31 @@ html {
     margin-bottom: 15px;
 }
 
+.message-right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
 .message-user img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.message-right .message-text {
+    background: #0078d4;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 75%;
+    word-wrap: break-word;
+    line-height: 1.4;
+    margin-right: 12px;
+}
+
 
 .message-text {
     background: #2b2b2b;

@@ -81,7 +81,9 @@ class UserController {
     static async chatPage(req, res) {
         const friend = await User.findById(req.params.id)
         const users = await User.find({ name: { $ne: req.user.name }, isVerify: true })
-        res.render('chat', { users, friend })
+        const user = req.user
+        const userID = req.user.id
+        res.render('chat', { users, friend, userID, user })
     }
 }
 
